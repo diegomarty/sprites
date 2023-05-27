@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
@@ -13,6 +15,15 @@ const corsOptions = {
   optionsSuccessStatus: 200,
 };
 
+app.use((req, res, next) => {
+    const authToken = req.headers['x-auth-token'];
+  
+    if (!authToken || authToken !== process.env.AUTH_TOKEN) {
+      return res.status(403).json({ error: 'Forbidden. Invalid or missing x-auth-token header.' });
+    }
+  
+    next();
+  });
 app.use(cors(corsOptions));
 app.use("/sprites", express.static(path.join(__dirname, "/sprites")));
 

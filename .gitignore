@@ -11,3 +11,4 @@ desktop.ini
 # Versioning
 .svn/
 .git/
+.env
