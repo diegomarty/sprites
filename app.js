@@ -4,13 +4,11 @@ const path = require('path');
 const app = express();
 
 const corsOptions = {
-    origin: ['http://www.diegomarty.com', 'https://www.diegomarty.com', 'http://localhost:3000', 'http://127.0.0.1:3000'],
-    optionsSuccessStatus: 200
-  }  
+  origin: ['http://www.diegomarty.com', 'https://www.diegomarty.com', 'http://localhost:3000', 'http://127.0.0.1:3000'],
+  optionsSuccessStatus: 200
+}
 
 app.use(cors(corsOptions));
 app.use('/sprites', express.static(path.join(__dirname, '/sprites')));
 
-app.listen(3000, () => {
-   console.log('Server is running on port 3000');
-});
+module.exports = app;
