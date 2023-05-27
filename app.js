@@ -7,6 +7,7 @@ const app = express();
 const fs = require("fs");
 const path = require("path");
 
+/*
 const corsOptions = {
   origin: [
     "http://www.diegomarty.com",
@@ -29,6 +30,8 @@ app.use((req, res, next) => {
   next();
 });
 app.use(cors(corsOptions));
+*/
+
 app.use("/sprites", express.static(path.join(__dirname, "/sprites")));
 
 app.get("/", (req, res) => {
