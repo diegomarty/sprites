@@ -17,7 +17,10 @@ const corsOptions = {
   optionsSuccessStatus: 200,
 };
 
-app.use((req, res, next) => {
+app.use(cors(corsOptions));
+
+// Function to check authentication
+const checkAuth = (req, res, next) => {
   const authToken = req.headers["x-auth-token"];
 
   if (!authToken || authToken !== process.env.AUTH_TOKEN) {
@@ -27,12 +30,20 @@ app.use((req, res, next) => {
   }
 
   next();
+};
+
+// Use checkAuth middleware for every route except '/'
+app.use((req, res, next) => {
+  if(req.path !== '/') {
+    checkAuth(req, res, next);
+  } else {
+    next();
+  }
 });
-app.use(cors(corsOptions));
 
-app.use("/sprites", express.static(path.join(__dirname, "/sprites")));
+app.use("/sprites", checkAuth, express.static(path.join(__dirname, "/sprites")));
 
-app.get("/sprites/*", (req, res) => {
+app.get("/sprites/*", checkAuth, (req, res) => {
   console.log(req.params);
   if (!req.query.page) {
     return res.status(400).json({
