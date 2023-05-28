@@ -30,20 +30,11 @@ const checkAuth = (req, res, next) => {
   if (!authToken || authToken !== process.env.AUTH_TOKEN) {
     return res
       .status(403)
-      .json({ error: "Forbidden. Invalid or missing x-auth-token header." });
+      .json({ error: "Forbidden. Invalid or missing headers." });
   }
 
   next();
 };
-
-// Use checkAuth middleware for every route except '/'
-app.use((req, res, next) => {
-  if(req.path !== '/') {
-    checkAuth(req, res, next);
-  } else {
-    next();
-  }
-});
 
 if (process.env.NODE_ENV !== 'production') {
   app.listen(PORT, () => {
@@ -51,7 +42,7 @@ if (process.env.NODE_ENV !== 'production') {
   });
 }
 
-app.use("/sprites", checkAuth, express.static(path.join(__dirname, "/sprites")));
+app.use("/sprite-image", express.static(path.join(__dirname, "/sprites")));
 
 app.get("/sprites/*", checkAuth, (req, res) => {
   console.log(req.params);
@@ -195,10 +186,10 @@ app.get("/", (req, res) => {
                 <div class="row">
                   <div class="col-12 col-md-8">
                     <pre class="bg-light p-3 rounded">
-                      <code>/sprites/pokemon/versions/generation-v/black-white</code>
+                      <code>/sprite-image/pokemon/versions/generation-v/black-white</code>
                     </pre>
-                    <p>This gets sprites from Pokemon Black and White.</p>
-                    <a href="${process.env.HOST}/sprites/pokemon/versions/generation-v/black-white/6.png">Click here</a> to try it.
+                    <p>This gets one sprite from Pokemon Black and White.</p>
+                    <a href="${process.env.HOST}/sprite-image/pokemon/versions/generation-v/black-white/6.png">Click here</a> to try it.
                   </div>
                   <div class="col-12 col-md-4 text-center">
                     <img src="/6.png" class="img-thumbnail" alt="Example image">
