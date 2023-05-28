@@ -3,8 +3,10 @@ require("dotenv").config();
 const fs = require("fs");
 const path = require("path");
 const express = require("express");
+const favicon = require('serve-favicon');
 const app = express();
 
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 const cors = require("cors");
 const corsOptions = {
@@ -151,10 +153,10 @@ app.get("/", (req, res) => {
                     <code>/sprites/pokemon/versions/generation-v/black-white</code>
                   </pre>
                   <p>This gets sprites from Pokemon Black and White.</p>
-                  <a href="${process.env.HOST}/sprites/pokemon/versions/generation-v/black-white/1.png">Click here</a> to try it.
+                  <a href="${process.env.HOST}/sprites/pokemon/versions/generation-v/black-white/6.png">Click here</a> to try it.
                 </div>
                 <div class="col-4">
-                  <img src="${process.env.HOST}/sprites/pokemon/versions/generation-v/black-white/1.png" class="img-thumbnail" alt="Example image">
+                  <img src="/public/6.png" class="img-thumbnail" alt="Example image">
                 </div>
               </div>
             </div>
