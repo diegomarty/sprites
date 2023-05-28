@@ -1,13 +1,12 @@
 require("dotenv").config();
 
-const express = require("express");
-const cors = require("cors");
-const path = require("path");
-const app = express();
 const fs = require("fs");
 const path = require("path");
+const express = require("express");
+const app = express();
 
 /*
+const cors = require("cors");
 const corsOptions = {
   origin: [
     "http://www.diegomarty.com",
