@@ -1,11 +1,4 @@
 {
-    "version": 2,
-    "builds": [
-        {
-            "src": "api/app.js",
-            "use": "@now/node-server"
-        }
-    ],
     "routes": [
         {
             "src": "/(.*)",
