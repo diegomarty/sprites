@@ -21,7 +21,7 @@ const corsOptions = {
 
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(cors(corsOptions));
+//app.use(cors(corsOptions));
 
 // Function to check authentication
 const checkAuth = (req, res, next) => {
@@ -44,7 +44,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 app.use("/sprite-image", express.static(path.join(__dirname, "/sprites")));
 
-app.get("/sprites/*", checkAuth, (req, res) => {
+app.get("/sprites/*", (req, res) => {
   console.log(req.params);
   if (!req.query.page) {
     return res.status(400).json({
@@ -111,7 +111,7 @@ app.get("/sprites/*", checkAuth, (req, res) => {
   });
 });
 
-app.get("/sprites-image/*", checkAuth, (req, res) => {
+app.get("/sprites-image/*", (req, res) => {
   const folderPath = req.params[0];
   const { id, getpath } = req.query;
 
