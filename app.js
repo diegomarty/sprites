@@ -42,7 +42,7 @@ if (process.env.NODE_ENV !== 'production') {
   });
 }
 
-app.use("/sprite-image", express.static(path.join(__dirname, "sprites")));
+app.use("/sprite-image", express.static(path.join("/sprites")));
 
 app.get("/sprites/*", checkAuth, (req, res) => {
   console.log(req.params);
@@ -70,7 +70,7 @@ app.get("/sprites/*", checkAuth, (req, res) => {
     });
   }
 
-  const spritesDir = path.join(req.protocol + '://' + req.get('host'), "sprites", folder); // path to your sprites directory
+  const spritesDir = path.join("sprites", folder); // path to your sprites directory
   fs.readdir(spritesDir, (err, files) => {
     if (err) {
       return res.status(500).json({
@@ -116,8 +116,8 @@ app.get("/sprites-image/*", checkAuth, (req, res) => {
   const { id, getpath } = req.query;
 
   // Definir las posibles rutas de los archivos
-  const pngFilePath = path.join(req.protocol + '://' + req.get('host'), "/sprites", folderPath, `${id}.png`);
-  const gifFilePath = path.join(req.protocol + '://' + req.get('host'), "/sprites", folderPath, `${id}.gif`);
+  const pngFilePath = path.join("/sprites", folderPath, `${id}.png`);
+  const gifFilePath = path.join("/sprites", folderPath, `${id}.gif`);
 
   fs.access(pngFilePath, fs.constants.F_OK, (err) => {
     if (err) { // si el .png no existe, buscamos el .gif
