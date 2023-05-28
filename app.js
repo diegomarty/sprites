@@ -5,7 +5,7 @@ const path = require("path");
 const express = require("express");
 const app = express();
 
-/*
+
 const cors = require("cors");
 const corsOptions = {
   origin: [
@@ -29,7 +29,6 @@ app.use((req, res, next) => {
   next();
 });
 app.use(cors(corsOptions));
-*/
 
 app.use("/sprites", express.static(path.join(__dirname, "/sprites")));
 
