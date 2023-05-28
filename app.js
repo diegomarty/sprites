@@ -55,10 +55,17 @@ app.get("/", (req, res) => {
 
 app.use("/sprites", express.static(path.join(__dirname, "/sprites")));
 
-app.get("/sprites/:folder*/:page/:count?", (req, res) => {
-  const page = Number(req.params.page);
-  const count = req.params.count ? Number(req.params.count) : 10; // Default to 10 if no count is provided
-  const folder = req.params['folder*'].join("/"); // Join the segments of the folder path
+app.get("/sprites/*", (req, res) => {
+  console.log(req.params);
+  if (!req.query.page) {
+    return res.status(400).json({
+      error: "Missing required parameter: page"
+    });
+  }
+
+  const page = Number(req.query.page);
+  const count = req.query.count ? Number(req.query.count) : 10; // Default to 10 if no count is provided
+  const folder = req.params[0];
 
   if (!Number.isInteger(page) || page < 1) {
     return res.status(400).json({
@@ -82,11 +89,28 @@ app.get("/sprites/:folder*/:page/:count?", (req, res) => {
       });
     }
 
+    // Map files to an array of [name, original] pairs
+    const mappedFiles = files.map((file) => [path.parse(file).name, file]);
+
+    // Custom sort
+    mappedFiles.sort((a, b) => {
+      const numA = parseInt(a[0], 10);
+      const numB = parseInt(b[0], 10);
+
+      if (numA !== numB) {
+        return numA - numB; // sort by number part if different
+      } else {
+        return a[0].localeCompare(b[0]); // else sort by whole name
+      }
+    });
+
     const startIndex = (page - 1) * count;
     const endIndex = startIndex + count;
-    const pageFiles = files
+    const pageFiles = mappedFiles
       .slice(startIndex, endIndex)
-      .map((file) => path.join(spritesDir, file));
+      .map(([name, original]) => ({
+        ruta: path.join(spritesDir, original),
+      }));
 
     if (pageFiles.length === 0) {
       return res
@@ -96,6 +120,10 @@ app.get("/sprites/:folder*/:page/:count?", (req, res) => {
 
     res.json(pageFiles);
   });
+});
+
+app.listen(5000, () => {
+  console.log('Server is running on port 5000');
 });
 
 module.exports = app;
