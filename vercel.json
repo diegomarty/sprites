@@ -8,12 +8,12 @@
     ],
     "routes": [
         {
-            "source": "/(.*)",
-            "destination": "app.js"
+            "src": "/(.*)",
+            "dest": "app.js"
         },
         {
-            "source": "/sprites/(.*)",
-            "destination": "sprites/$1"
+            "src": "/sprites/(.*)",
+            "dest": "sprites/$1"
         }
     ]
 }
