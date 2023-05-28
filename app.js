@@ -120,7 +120,7 @@ app.get("/sprites/*", checkAuth, (req, res) => {
   });
 });
 
-app.get("/sprites/*", checkAuth, (req, res) => {
+app.get("/sprites/image/*", checkAuth, (req, res) => {
   const folderPath = req.params[0];
   const { id, getpath } = req.query;
 
@@ -271,7 +271,7 @@ app.get("/", (req, res) => {
                   <code>/sprites/pokemon/?id=25&getpath=true</code>
                 </pre>
                 <p>This gets the path to the sprite of the Pokemon with the specified ID (if it exists).</p>
-                <a href="${process.env.HOST}/sprites/pokemon/?id=25&getpath=true">Click here</a> to try it.
+                <a href="${process.env.HOST}/sprites/image/pokemon/?id=25&getpath=true">Click here</a> to try it.
                 <p>On successful request, it would return something like:</p>
                 <pre class="bg-light p-3 rounded">
                   <code>
