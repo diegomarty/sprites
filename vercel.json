@@ -16,7 +16,7 @@
             "dest": "app.js"
         },
         {
-            "src": "/sprites/image/(.*)",
+            "src": "/sprites-image/(.*)",
             "dest": "app.js"
         }
     ]
