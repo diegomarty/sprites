@@ -32,24 +32,26 @@ app.use(cors(corsOptions));
 */
 
 app.get("/", (req, res) => {
-  res.send(`
-      <h1>Welcome to our Sprites API</h1>
-      You can make requests to the following routes:
-      <ul>
-        <li><code>/sprites/:folder*/:page/:count?</code> - Get the paths to a certain number of images (default 10) on a certain page in a specified folder. For example, /sprites/pokemon/versions/generation-v/black-white/animated/1/30 will return the paths to the first 30 images on page 1 in the folder sprites/pokemon/versions/generation-v/black-white/animated.
-      </ul>
+    res.send(`
+      <div style="text-align: center; padding: 20px; font-family: Arial, sans-serif;">
+        <h1 style="color: #444;">Welcome to our Sprites API</h1>
+        <p style="color: #666;">You can make requests to the following routes:</p>
+        <ul style="list-style: none; padding-left: 0;">
+          <li style="margin-bottom: 10px;"><code style="background-color: #f9f9f9; padding: 5px; border-radius: 5px;">/sprites/*/?page=1&count=10</code> - Get the paths to a certain number of images (default 10) on a certain page in a specified folder. For example, /sprites/pokemon/versions/generation-v/black-white/animated/1/30 will return the paths to the first 30 images on page 1 in the folder sprites/pokemon/versions/generation-v/black-white/animated.</li>
+        </ul>
 
-      <p>For all routes, :folder* represents the path to the folder containing the images, :page represents the page number (starting from 1), and :count represents the number of images to return (default 10 if not provided).</p>
-      <p>You can make requests to get various Pokemon sprites.</p>
-      <p>Here are some example endpoints you can use:</p>
+        <p style="color: #666;">For all routes, :folder* represents the path to the folder containing the images, :page represents the page number (starting from 1), and :count represents the number of images to return (default 10 if not provided).</p>
+        <p style="color: #666;">You can make requests to get various Pokemon sprites.</p>
+        <p style="color: #666;">Here are some example endpoints you can use:</p>
 
-      <ul>
-        <li><code>/sprites/pokemon/versions/generation-v/black-white</code> - Get sprites from Pokemon Black and White</li>
-        <li><code>/sprites/pokemon/versions/generation-viii/icons</code> - Get icons from Pokemon Sword and Shield</li>
-        <!-- Continue with the rest of the generations and versions as needed -->
-      </ul>
-      
-      <p>Note: Replace any spaces in the path with %20 to ensure the URL is encoded correctly.</p>
+        <ul style="list-style: none; padding-left: 0;">
+          <li style="margin-bottom: 10px;"><code style="background-color: #f9f9f9; padding: 5px; border-radius: 5px;">/sprites/pokemon/versions/generation-v/black-white</code> - Get sprites from Pokemon Black and White</li>
+          <li style="margin-bottom: 10px;"><code style="background-color: #f9f9f9; padding: 5px; border-radius: 5px;">/sprites/pokemon/versions/generation-viii/icons</code> - Get icons from Pokemon Sword and Shield</li>
+          <!-- Continue with the rest of the generations and versions as needed -->
+        </ul>
+
+        <p style="color: #666;">Note: Replace any spaces in the path with %20 to ensure the URL is encoded correctly.</p>
+      </div>
     `);
 });
 
