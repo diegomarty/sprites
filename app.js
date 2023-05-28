@@ -32,7 +32,6 @@ app.use((req, res, next) => {
 app.use(cors(corsOptions));
 */
 
-
 app.get("/", (req, res) => {
   res.send(`
       <h1>Welcome to our Sprites API</h1>
