@@ -42,9 +42,9 @@ if (process.env.NODE_ENV !== 'production') {
   });
 }
 
-app.use("/sprite", express.static(path.join(__dirname, "/sprites")));
+app.use("/sprites", express.static(path.join(__dirname, "/sprites")));
 
-app.get("/sprites-image/*", (req, res) => {
+app.get("/sprites-data/*", (req, res) => {
   console.log(req.params);
   if (!req.query.page) {
     return res.status(400).json({
