@@ -32,7 +32,6 @@ app.use((req, res, next) => {
 app.use(cors(corsOptions));
 */
 
-app.use("/sprites", express.static(path.join(__dirname, "/sprites")));
 
 app.get("/", (req, res) => {
   res.send(`
@@ -68,6 +67,8 @@ app.get("/", (req, res) => {
       <p>Note: Replace any spaces in the path with %20 to ensure the URL is encoded correctly.</p>
     `);
 });
+
+app.use("/sprites", express.static(path.join(__dirname, "/sprites")));
 
 app.get("/sprites/:folder*/:page/:count?", (req, res) => {
   const page = Number(req.params.page);

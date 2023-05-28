@@ -1,12 +1,19 @@
 {
+    "version": 2,
+    "builds": [
+        {
+            "src": "app.js",
+            "use": "@now/node"
+        }
+    ],
     "routes": [
         {
-            "src": "/(.*)",
-            "dest": "app.js"
+            "source": "/(.*)",
+            "destination": "app.js"
         },
         {
-            "src": "/sprites/(.*)",
-            "dest": "sprites/$1"
+            "source": "/sprites/(.*)",
+            "destination": "sprites/$1"
         }
     ]
 }
