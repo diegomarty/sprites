@@ -58,7 +58,7 @@ app.use("/sprites", express.static(path.join(__dirname, "/sprites")));
 app.get("/sprites/:folder*/:page/:count?", (req, res) => {
   const page = Number(req.params.page);
   const count = req.params.count ? Number(req.params.count) : 10; // Default to 10 if no count is provided
-  const folder = req.params.folder.join("/"); // Join the segments of the folder path
+  const folder = req.params['folder*'].join("/"); // Join the segments of the folder path
 
   if (!Number.isInteger(page) || page < 1) {
     return res.status(400).json({
