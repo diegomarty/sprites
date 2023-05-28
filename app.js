@@ -1,12 +1,12 @@
 require("dotenv").config();
 
+const PORT = process.env.PORT || 5000;
+
 const fs = require("fs");
 const path = require("path");
 const express = require("express");
 const favicon = require('serve-favicon');
 const app = express();
-
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 const cors = require("cors");
 const corsOptions = {
@@ -19,6 +19,7 @@ const corsOptions = {
   optionsSuccessStatus: 200,
 };
 
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(cors(corsOptions));
 
 // Function to check authentication
@@ -112,10 +113,11 @@ app.get("/sprites/*", checkAuth, (req, res) => {
   });
 });
 
-app.listen(5000, () => {
-  console.log("Server is running on port 5000");
-});
-
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+}
 app.get("/", (req, res) => {
   res.send(`
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
